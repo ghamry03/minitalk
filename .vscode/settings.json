@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"minitalk.h": "c",
+		"sstream": "c"
+	}
+}
