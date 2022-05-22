@@ -6,32 +6,57 @@
 /*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:27:19 by ommohame          #+#    #+#             */
-/*   Updated: 2022/05/20 02:51:58 by ommohame         ###   ########.fr       */
+/*   Updated: 2022/05/22 14:45:22 by ommohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minitalk.h"
 
+int		g_a;
+
+void	handler(int sig)
+{
+	(void)sig;
+	if (g_a == 1)
+		exit (0);
+	g_a = 1;
+	usleep(100);
+}
+
 void	send_bits(char *str, int pid)
 {
-	size_t	i;
-	int		j;
+	int					j;
+	size_t				i;
+	struct sigaction	sa;
 
 	i = 0;
+	sa.sa_handler = &handler;
 	while (str[i])
 	{
 		j = 0;
 		while (j < 8)
 		{
-			if (((str[i] >> j) & 1) == 1)
-				kill(pid, SIGUSR1);
-			else
-				kill(pid, SIGUSR2);
-			usleep(100);
-			j++;
+			if (g_a == 1)
+			{
+				if (((str[i] >> j) & 1) == 1)
+					kill(pid, SIGUSR1);
+				else
+					kill(pid, SIGUSR2);
+					j++;
+				g_a = 0;
+			}
+			sigaction(SIGUSR1, &sa, NULL);
 		}
 		i++;
 	}
+}
+
+void	send_space(int pid)
+{
+	char	*str;
+
+	str = ft_strdup(" ");
+	send_bits(str, pid);
 }
 
 int	main(int ac, char **av)
@@ -50,8 +75,13 @@ int	main(int ac, char **av)
 		ft_printf("PID is not valid\n");
 		exit (0);
 	}
+	g_a = 1;
 	i = 2;
 	while (av[i])
+	{
 		send_bits(av[i++], pid);
-	return (1);
+		if (av[i])
+			send_space(pid);
+	}
+	handler(0);
 }

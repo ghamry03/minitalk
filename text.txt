@@ -1,0 +1,1507 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 09:35:02 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:09:59 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* ignores first white spaces
+* if first char after white space is negative returns neg value
+* else if it's positive returns pos value
+* then returns every digit until it finds non-digit char
+*/
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	neg;
+	int	num;
+
+	i = 0;
+	neg = 1;
+	num = 0;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == 45)
+	{
+		neg = -1;
+		i++;
+	}
+	else if (str[i] == 43)
+		i++;
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		num = num * 10 + (str[i] - 48);
+		i++;
+	}
+	return (num * neg);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/21 22:02:51 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/26 19:37:01 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* does the same thing as memset but replace it with NULL
+* you can use it as a safety option to hide sensitive data
+*/
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, '\0', n);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/26 18:54:36 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:03:36 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* mallocs the size * count
+* fills it with NULL
+*/
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*s;
+
+	s = malloc(size * count);
+	if (!s)
+		return (0);
+	ft_bzero(s, count * size);
+	return (s);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 21:26:52 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/22 20:49:51 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+ * checks if int C is alphabet or num
+ */
+int	ft_isalnum(int c)
+{
+	unsigned char	ch;
+
+	ch = (unsigned char)c;
+	if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122))
+		return (1);
+	else if (ch >= 48 && ch <= 57)
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 21:26:52 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/22 20:49:48 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+ * checks if int c is an alphabet
+ */
+int	ft_isalpha(int c)
+{
+	unsigned char	ch;
+
+	ch = (unsigned char)c;
+	if (ch >= 65 && ch <= 90)
+		return (1);
+	else if (ch >= 97 && ch <= 122)
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/20 02:21:03 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/22 20:49:44 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+ * checks if int c is from ascii (0 to 127)
+ */
+int	ft_isascii(int c)
+{
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 21:34:44 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/22 20:49:41 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+ * checks if int C is digit (1 to 9)
+ */
+int	ft_isdigit(int c)
+{
+	unsigned char	ch;
+
+	ch = (unsigned char)c;
+	if (ch >= 48 && ch <= 57)
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/20 03:18:55 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/22 20:49:38 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+ * checks if int C is printable ascii (32 to 126)
+ */
+int	ft_isprint(int c)
+{
+	unsigned char	ch;
+
+	ch = (unsigned char)c;
+	if (ch >= 32 && ch <= 126)
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/05 13:10:36 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:30:13 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	num_len(long num, long *divide)
+{
+	int	count;
+
+	count = 1;
+	while (num / *divide > 0)
+	{
+		*divide *= 10;
+		count++;
+	}
+	return (count);
+}
+
+/*
+* changes int n into *str
+* return the new str
+*/
+char	*ft_itoa(int n)
+{
+	int			i;
+	int			neg;
+	long		divide;
+	long		num;
+	char		*str;
+
+	i = 0;
+	neg = 0;
+	num = (long)n;
+	divide = 10;
+	if (num < 0)
+		num *= (++neg * -1);
+	str = (char *)malloc(sizeof(char) * (num_len(num, &divide) + neg + 1));
+	if (neg == 1)
+		str[i++] = '-';
+	divide = 10;
+	neg += num_len(num, &divide);
+	while (i < neg)
+	{
+		divide /= 10;
+		str[i++] = (num / divide) + 48;
+		num %= divide;
+	}
+	str[i] = 0;
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/09 02:40:11 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:11:44 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* adds a node to the back of the list
+* moves the NULL to the end
+*/
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	if (!lst || !new)
+		return ;
+	if (*lst)
+	{
+		ft_lstlast(*lst)-> next = new;
+	}
+	else
+		*lst = new;
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/08 21:42:55 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:13:23 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/* 
+* add a new node to the begining of the list
+* the new node points to the old list
+*/
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new -> next = *lst;
+	*lst = new;
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/09 19:18:30 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:16:44 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* Deletes and frees the given element
+* using the function ’del’and free(3).
+* Finally, the pointer to the list must be set to NULL
+*/
+void	ft_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list	*tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)-> next;
+		ft_lstdelone(*lst, del);
+		*lst = tmp;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/09 18:53:58 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:18:22 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* Takes as a parameter an element and frees it
+* delete the content using the function’del’ given as a parameter
+* next is not freed
+*/
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (!lst && !del)
+		return ;
+	del (lst -> content);
+	free (lst);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 22:46:46 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:21:31 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* applies the function f to the current element
+* keeps going in the list until it applies it to every function
+*/
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		(f)(lst -> content);
+		lst = lst -> next;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/09 00:46:25 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:22:27 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* kee going through the list until it finds the last element
+* return the last element
+*/
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst -> next != 0)
+	{
+		lst = lst -> next;
+	}
+	return (lst);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/09 23:27:42 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:24:09 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* makes a new list
+* applies f function on old lst content then saves it in the new list
+* uses del function if content is NULL
+* returns the new list
+*/
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*tmp;
+	t_list	*new;
+
+	if (!lst || !f)
+		return (0);
+	new = 0;
+	while (lst)
+	{
+		tmp = ft_lstnew(f(lst -> content));
+		if (!tmp)
+		{		
+			ft_lstclear(&new, del);
+			return (0);
+		}	
+		ft_lstadd_back(&new, tmp);
+		lst = lst -> next;
+	}
+	return (new);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/08 17:24:35 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:25:04 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* makes a new list and put new content inside it
+*/
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*head;
+
+	head = malloc(sizeof(t_list));
+	if (!head)
+		return (0);
+	head -> content = content;
+	head -> next = 0;
+	return (head);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/08 22:48:15 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:27:05 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* checks the lst size and returns it
+*/
+int	ft_lstsize(t_list *lst)
+{
+	size_t	count;
+
+	count = 0;
+	while (lst != 0)
+	{
+		count++;
+		lst = lst -> next;
+	}
+	return (count);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 09:12:18 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:37:13 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* searches for the first occurrence of the character c
+* n the first n bytes of the string pointed to
+* This function returns a pointer to the matching byte 
+* or NULL if the character does not occur
+*/
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned int			i;
+	unsigned char			*ch;
+
+	ch = (unsigned char *)s;
+	i = -1;
+	while (++i < n)
+	{
+		if (ch[i] == (unsigned char)c)
+			return (ch + i);
+	}
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 09:29:05 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:38:46 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* compares the first n bytes of memory 
+* area str1 and memory area str2
+*/
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*s1_ch;
+	unsigned char	*s2_ch;
+
+	i = -1;
+	s1_ch = (unsigned char *)s1;
+	s2_ch = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (++i < n)
+	{
+		if (s1_ch[i] != s2_ch[i])
+			return (s1_ch[i] - s2_ch[i]);
+	}
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 03:51:26 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:07:41 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* memcpy copies from const void *src address to void *dst address
+* it does it n times and everytime it changes to the next address (+1)
+* it doesn't check for overflow or null
+* ft_memmove handles overlappping
+*/
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t			i;
+	unsigned char	*ch;
+
+	if (!src && !dst)
+		return (0);
+	i = -1;
+	ch = (unsigned char *)src;
+	while (++i < n)
+	{
+		ft_memset(dst + i, ch[i], 1);
+	}
+	return (dst);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 03:51:26 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:08:09 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* does the same thing as memcpy but handles overflows
+* memmove copies from const void *src address to void *dst address
+* it does it n times and everytime it changes to the next address (+1)
+*/
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t			i;
+	unsigned char	*src_ch;
+
+	if (!dst && !src)
+		return (0);
+	i = -1;
+	src_ch = (unsigned char *)src;
+	if (dst > src)
+	{
+		while (--len + 1 > 0)
+		{
+			ft_memset(dst + len, src_ch[len], 1);
+		}
+	}
+	else
+	{
+		while (++i < len)
+		{
+			ft_memset(dst + i, src_ch[i], 1);
+		}
+	}
+	return (dst);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 00:00:23 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/23 20:54:44 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+ * take address of void *b and convert it to unsiged char *ch
+ * replace every character in the address with int c
+ * keep doing it until it reaches size_t len
+ */
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t			i;
+	unsigned char	*ch;
+
+	i = -1;
+	ch = (unsigned char *)b;
+	while (++i < len)
+	{
+		ch[i] = c;
+	}
+	return (ch);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/02 23:52:05 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:41:55 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/* 
+* writes only one character
+* uses the parameter fd to identify type of write return
+*/
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/06 13:18:17 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:21:02 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* printing every character in string s
+* prints a new line after it
+*/
+void	ft_putendl_fd(char *s, int fd)
+{
+	size_t	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+	ft_putchar_fd('\n', fd);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/04 16:18:36 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:43:56 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* prints out every digit in n
+*/
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	i;
+	char	tmp;
+
+	i = 10;
+	if (n == -2147483648)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		n = 147483648;
+	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n *= -1;
+	}
+	while (n >= i)
+		i *= 10;
+	while (i > 1)
+	{
+		i /= 10;
+		tmp = (n / i) + 48;
+		ft_putchar_fd(tmp, fd);
+		n %= i;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/02 23:56:57 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:20:37 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* uses ft_put char to print out every character in string s
+*/
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/03 00:21:39 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:48:09 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* counts how many words do I have to use it for malloc
+*/
+static int	word_count(char const *s, char c)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (s[i] == c && s[i])
+		i++;
+	while (s[i])
+	{
+		if ((s[i] == c && s[i]) || s[i + 1] == 0)
+		{
+			count++;
+			while (s[i] == c && s[i + 1] == c)
+				i++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+/*
+* checks out my word len to use it for malloc
+*/
+static int	word_len(char const *s, char c, int i)
+{
+	while (s[i])
+	{
+		if (s[i] == c && s[i])
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+/*
+* split but norminette friendly
+*/
+static char	**splitbutnotsplit(char **str, char const *s, char c, int i)
+{
+	int	x;
+
+	x = 0;
+	while (x < word_count(s, c) && s[i])
+	{
+		if (s[i] == c || i == 0)
+		{
+			while (s[i] == c && s[i])
+				i++;
+			str[x] = (char *)malloc(sizeof(char) * (word_len(s, c, i) - i + 1));
+			if (!str[x])
+				return (NULL);
+			ft_strlcpy(str[x], s + i, (word_len(s, c, i) - i + 1));
+			i = word_len(s, c, i) - 1;
+			x++;
+		}
+		i++;
+	}
+	str[x] = NULL;
+	return (str);
+}
+
+/*
+* split char s into words
+* splits them every time it finds char c
+* copies every word into the new string
+* returns double pointer string
+*/
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	char	**str;
+
+	if (!s)
+		return (NULL);
+	str = (char **)malloc(sizeof(char *) * (word_count(s, c) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	splitbutnotsplit(str, s, c, i);
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 07:31:34 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/29 05:19:58 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* convert int c into char ch
+* search for ch in *s
+* if they match it returns pointer to the match
+* else it returns NULL
+*/
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned int	i;
+	char			*ch;
+
+	ch = (char *)s;
+	i = -1;
+	while (++i < ft_strlen(ch) + 1)
+	{
+		if (ch[i] == (unsigned char)c)
+			return (ch + i);
+	}
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/27 22:01:58 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:08:52 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* creates a new string which is a duplicate of string s
+* returns a pointer to a new string
+*/
+char	*ft_strdup(const char *s1)
+{
+	size_t	i;
+	char	*s2;
+
+	i = 0;
+	s2 = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!s2)
+		return (0);
+	while (s1[i])
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	s2[i] = 0;
+	return (s2);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/06 00:30:37 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:50:05 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* applies function F to every element in S
+*/
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	unsigned int	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame <ommohame@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 01:18:18 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/28 16:13:58 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* joins s1 and s2 together in a new string
+* returns the result
+*/
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	i;
+	size_t	j;
+	size_t	len;
+	char	*str;
+
+	if (!s1 || !s2)
+		return (0);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	i = -1;
+	j = -1;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (0);
+	while (s1[++i])
+	{
+		str[i] = s1[i];
+	}
+	while (s2[++j])
+	{
+		str[i++] = s2[j];
+	}
+	str[i] = 0;
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 03:14:02 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/01 04:30:14 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/* 
+* copies chars from src
+* puts them at the end of dst
+* puts null at the end
+*/
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+	size_t	j;
+	size_t	src_len;
+	size_t	dst_len;
+
+	i = ft_strlen(dst);
+	j = 0;
+	src_len = ft_strlen(src);
+	dst_len = ft_strlen(dst);
+	while (src[j] && i + 1 < dstsize)
+	{
+		dst[i] = src[j];
+		i++;
+		j++;
+	}
+	dst[i] = '\0';
+	if (dstsize > dst_len)
+		return (src_len + dst_len);
+	else
+		return (src_len + dstsize);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 20:06:18 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/29 19:41:34 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* Replace dst[i] with src[i]
+*/
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+
+	i = 0;
+	if (dstsize > 0)
+	{
+		while (i < dstsize - 1 && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 00:00:23 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/27 20:33:43 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* returns length of const char *s
+* NULL is not counted
+*/
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len])
+	{
+		len++;
+	}
+	return (len);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/06 00:03:43 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:52:21 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* creates a new string
+* applies f function to s and saves it in the new string
+* returns the new string
+*/
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	if (!s || !f)
+		return (0);
+	str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!str)
+		return (0);
+	while (s[i])
+	{
+		str[i] = (*f)(i, s[i]);
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 08:50:44 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/23 11:26:25 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* compare between s1 and s2 lexicographically
+* if it reaches n it stops comparing
+* else if it reaches null in s1 or s2 it stops
+* returns s1 - s2 if there is difference
+* else returns NULL
+*/
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*ch1;
+	unsigned char	*ch2;
+
+	ch1 = (unsigned char *)s1;
+	ch2 = (unsigned char *)s2;
+	i = -1;
+	if (n == 0)
+		return (0);
+	while ((++i < n) && (ch1[i] || ch2[i]))
+	{
+		if (ch1[i] != ch2[i])
+			return (ch1[i] - ch2[i]);
+	}
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/27 21:28:09 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/12 23:56:37 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* locates the first occurrence of the null-terminated string
+* where not more than len characters are searched
+* characters that appear after a `\0' character are not searched
+*/
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+	size_t	i;
+	size_t	j;
+	char	*hay;
+
+	i = 0;
+	hay = (char *)haystack;
+	if (!*needle)
+		return (hay);
+	while (hay[i] && i < len)
+	{
+		j = 0;
+		if (hay[i] == needle[0])
+		{
+			while (needle[j] == hay[i + j] && needle[j]
+				&& (i + j < len))
+			{
+				j++;
+			}
+			if (needle[j] == 0)
+				return (&hay[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 07:23:37 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/31 19:13:42 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* convert int c into char ch
+* search for last ch in *s
+* if they match it keeps searching for another match
+* it returns pointer to the match
+* else it returns NULL
+*/
+char	*ft_strrchr(const char *s, int c)
+{
+	unsigned int	i;
+	int				tmp;
+	char			*ch;
+
+	i = -1;
+	tmp = -1;
+	ch = (char *)s;
+	while (ch[++i])
+	{
+		if (ch[i] == (unsigned char)c)
+			tmp = i;
+	}
+	if (c == '\0')
+		return (ch + i);
+	if (tmp != -1)
+		return (ch + tmp);
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 17:00:23 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/13 00:01:47 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* trims the beginning and the end of the s1 from set
+*/
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	i;
+	size_t	j;
+	char	*str;
+
+	i = 0;
+	if (!s1)
+		return (NULL);
+	while (s1[i] && ft_strchr(set, s1[i]))
+	{
+		i++;
+	}
+	j = ft_strlen(s1);
+	while (j > i && ft_strchr(set, s1[j - 1]))
+	{
+		j--;
+	}
+	j = j - i;
+	str = (char *)malloc(sizeof(char) * (j + 1));
+	if (!str)
+		return (NULL);
+	ft_strlcpy(str, s1 + i, j + 1);
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 00:46:59 by ommohame          #+#    #+#             */
+/*   Updated: 2022/01/13 00:03:52 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* creates a sub string
+* starts from s + start
+* copies len times
+*/
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	s_len;
+	char	*sub;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start > s_len)
+		return (ft_strdup(""));
+	if (len > s_len - start)
+		len = s_len - start;
+	sub = (char *)malloc(sizeof(char) * (len + 1));
+	if (!sub)
+		return (NULL);
+	ft_strlcpy(sub, s + start, len + 1);
+	return (sub);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 06:02:34 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/23 07:23:09 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* if C is upperclase changes it to lowercase
+* else it returns C 
+*/
+int	ft_tolower(int c)
+{
+	unsigned char	ch;
+
+	ch = (unsigned char)c;
+	if (ch >= 65 && ch <= 90)
+		return (ch + 32);
+	else
+		return (ch);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ommohame < ommohame@student.42abudhabi.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 06:02:34 by ommohame          #+#    #+#             */
+/*   Updated: 2021/12/23 07:23:18 by ommohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+* If C is lowercase changes it to uppercase
+* else it returns C 
+*/
+int	ft_toupper(int c)
+{
+	unsigned char	ch;
+
+	ch = (unsigned char)c;
+	if (ch >= 97 && ch <= 122)
+		return (ch - 32);
+	else
+		return (ch);
+}

@@ -6,23 +6,23 @@
 /*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:27:19 by ommohame          #+#    #+#             */
-/*   Updated: 2022/05/22 13:43:46 by ommohame         ###   ########.fr       */
+/*   Updated: 2022/05/22 14:53:56 by ommohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minitalk.h"
 
-int		a;
+int		g_a;
 
 void	handler(int sig)
 {
 	(void)sig;
-	if (a == 1)
+	if (g_a == 1)
 	{
-		ft_printf("DONE");
+		ft_printf("MESSAGE SENT\n");
 		exit (0);
 	}
-	a = 1;
+	g_a = 1;
 	usleep(100);
 }
 
@@ -39,19 +39,27 @@ void	send_bits(char *str, int pid)
 		j = 0;
 		while (j < 8)
 		{
-			if (a == 1)
+			if (g_a == 1)
 			{
 				if (((str[i] >> j) & 1) == 1)
 					kill(pid, SIGUSR1);
 				else
 					kill(pid, SIGUSR2);
 					j++;
-				a = 0;
+				g_a = 0;
 			}
 			sigaction(SIGUSR1, &sa, NULL);
 		}
 		i++;
 	}
+}
+
+void	send_space(int pid)
+{
+	char	*str;
+
+	str = ft_strdup(" ");
+	send_bits(str, pid);
 }
 
 int	main(int ac, char **av)
@@ -61,21 +69,22 @@ int	main(int ac, char **av)
 
 	if (ac < 3)
 	{
-		ft_printf("ERROR\n");
+		ft_printf("ERROR: ENTER THE PROGRAM NAME PID THEN YOUR MSG \n");
 		exit(0);
 	}
 	pid = ft_atoi(av[1]);
 	if (kill(pid, 0) == -1)
 	{
-		ft_printf("PID is not valid\n");
+		ft_printf("PID is incorrect\n");
 		exit (0);
 	}
-	a = 1;
+	g_a = 1;
 	i = 2;
 	while (av[i])
 	{
-		send_bits(av[i], pid);
-		i++;
+		send_bits(av[i++], pid);
+		if (av[i])
+			send_space(pid);
 	}
 	handler(0);
 }

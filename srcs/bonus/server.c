@@ -6,13 +6,13 @@
 /*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:23:55 by ommohame          #+#    #+#             */
-/*   Updated: 2022/05/22 13:47:32 by ommohame         ###   ########.fr       */
+/*   Updated: 2022/05/22 14:26:22 by ommohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minitalk.h"
 
-int		a;
+int		g_a;
 
 void	handler(int sig, siginfo_t *si, void *data)
 {
@@ -25,6 +25,7 @@ void	handler(int sig, siginfo_t *si, void *data)
 		if (sig == SIGUSR1)
 			c = c | (1 << i);
 		i++;
+		usleep(100);
 		kill(si->si_pid, SIGUSR1);
 		if (i == 8)
 		{
@@ -33,7 +34,7 @@ void	handler(int sig, siginfo_t *si, void *data)
 			c = 0;
 		}
 	}
-	a = 0;
+	g_a = 0;
 }
 
 void	sig_rec(void)
@@ -42,7 +43,7 @@ void	sig_rec(void)
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler;
-	if (a == 1)
+	if (g_a == 1)
 	{
 		sigaction(SIGUSR1, &sa, NULL);
 		sigaction(SIGUSR2, &sa, NULL);
@@ -53,7 +54,7 @@ int	main(void)
 {
 	int					pid;
 
-	a = 1;
+	g_a = 1;
 	pid = getpid();
 	ft_printf("PID: %d\n", pid);
 	while (1)
