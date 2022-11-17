@@ -6,7 +6,7 @@
 /*   By: ommohame < ommohame@student.42abudhabi.ae> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:27:19 by ommohame          #+#    #+#             */
-/*   Updated: 2022/05/22 14:45:22 by ommohame         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:34:55 by ommohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int ac, char **av)
 		exit(0);
 	}
 	pid = ft_atoi(av[1]);
-	if (kill(pid, 0) == -1)
+	if (pid == 0 || kill(pid, 0) == -1)
 	{
 		ft_printf("PID is not valid\n");
 		exit (0);
